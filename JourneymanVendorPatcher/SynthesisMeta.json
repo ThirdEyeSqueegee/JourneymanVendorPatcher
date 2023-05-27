@@ -1,0 +1,16 @@
+{
+  "Nickname": "JourneymanVendorPatcher",
+  "Visibility": "Visible",
+  "OneLineDescription": "Adds buyable travel packs to all innkeepers and Khajiit caravans",
+  "LongDescription": "",
+  "PreferredAutoVersioning": "Default",
+  "RequiredMods": [
+    "Journeyman.esp"
+  ],
+  "TargetedReleases": [
+    "SkyrimLE",
+    "SkyrimSE",
+    "SkyrimVR",
+    "SkyrimSEGog"
+  ]
+}
