@@ -50,10 +50,11 @@ namespace JourneymanVendorPatcher
                 throw new Exception("ERROR: Journeyman.esp not found in load order");
 
             var travelPack = state.LinkCache.Resolve<IMiscItemGetter>("MAG_TravelPack");
-            var foodKywd = state.LinkCache.Resolve<IKeywordGetter>("VendorItemFood");
+            var travelPackKywd = state.LinkCache.Resolve<IKeywordGetter>("MAG_TravelPackKeyword");
 
-            var patchedTravelPack = state.PatchMod.MiscItems.GetOrAddAsOverride(travelPack);
-            patchedTravelPack.Keywords!.Add(foodKywd);
+            var innkeeperFormlist = state.LinkCache.Resolve<IFormListGetter>("VendorItemsInnkeeper");
+            var patchedFormlist = state.PatchMod.FormLists.GetOrAddAsOverride(innkeeperFormlist);
+            patchedFormlist.Items.Add(travelPackKywd);
 
             foreach (var merchantChest in state.LoadOrder.PriorityOrder.Container().WinningContextOverrides())
             {
@@ -65,7 +66,7 @@ namespace JourneymanVendorPatcher
                 {
                     Item = new ContainerItem
                     {
-                        Item = patchedTravelPack.ToLink(),
+                        Item = travelPack.ToLink(),
                         Count = 3
                     }
                 });
