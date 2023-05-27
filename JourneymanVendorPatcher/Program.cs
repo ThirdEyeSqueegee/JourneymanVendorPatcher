@@ -2,6 +2,7 @@ using Mutagen.Bethesda;
 using Mutagen.Bethesda.Plugins;
 using Mutagen.Bethesda.Synthesis;
 using Mutagen.Bethesda.Skyrim;
+using Noggog;
 
 namespace JourneymanVendorPatcher
 {
@@ -17,7 +18,7 @@ namespace JourneymanVendorPatcher
 
         private static readonly ModKey Journeyman = ModKey.FromNameAndExtension("Journeyman.esp");
 
-        private static readonly HashSet<string> edids = new()
+        private static readonly HashSet<string> Edids = new()
         {
             "MerchantCaravanAChest",
             "MerchantCaravanBChest",
@@ -49,10 +50,14 @@ namespace JourneymanVendorPatcher
                 throw new Exception("ERROR: Journeyman.esp not found in load order");
 
             var travelPack = state.LinkCache.Resolve<IMiscItemGetter>("MAG_TravelPack");
+            var foodKywd = state.LinkCache.Resolve<IKeywordGetter>("VendorItemFood");
+
+            var patchedTravelPack = state.PatchMod.MiscItems.GetOrAddAsOverride(travelPack);
+            patchedTravelPack.Keywords!.Add(foodKywd);
 
             foreach (var merchantChest in state.LoadOrder.PriorityOrder.Container().WinningContextOverrides())
             {
-                if (!edids.Contains(merchantChest.Record.EditorID!)) continue;
+                if (!Edids.Contains(merchantChest.Record.EditorID!)) continue;
 
                 var patchedChest = state.PatchMod.Containers.GetOrAddAsOverride(merchantChest.Record);
 
@@ -60,7 +65,7 @@ namespace JourneymanVendorPatcher
                 {
                     Item = new ContainerItem
                     {
-                        Item = travelPack.ToLink(),
+                        Item = patchedTravelPack.ToLink(),
                         Count = 3
                     }
                 });
