@@ -30,6 +30,7 @@ namespace JourneymanVendorPatcher
 
         private static readonly HashSet<string> Edids = new()
         {
+            "DLC2RRGeldisVendorChest",
             "MerchantCaravanAChest",
             "MerchantCaravanBChest",
             "MerchantCaravanCChest",
@@ -44,8 +45,8 @@ namespace JourneymanVendorPatcher
             "MerchantOldHroldanHangedManInnChest",
             "MerchantRiftenBeeandBarbChest",
             "MerchantRiverwoodSleepingGiantChest",
-            "MerchantRoriksteadFrostFruitInnChest",
             "MerchantRiverwoodTraderChest",
+            "MerchantRoriksteadFrostFruitInnChest",
             "MerchantSolitudeWinkingSkeeverChest",
             "MerchantWhiterunBannerdMareChest",
             "MerchantWhiterunBelethorsGoodsChest",
