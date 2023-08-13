@@ -84,8 +84,6 @@ namespace JourneymanVendorPatcher
 
                 Console.WriteLine($"Added {_settings.Value.Count} travel packs to {merchantChest.Record.EditorID}");
             }
-
-            state.PatchMod.ModHeader.Flags = SkyrimModHeader.HeaderFlag.LightMaster;
         }
     }
 }
